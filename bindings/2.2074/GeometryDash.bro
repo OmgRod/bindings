@@ -9661,7 +9661,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     TodoReturn triggerDynamicRotateCommand(EnhancedTriggerObject*);
     void triggerGradientCommand(GradientTriggerObject*) = win 0x21a3a0, imac 0x128bc0, m1 0x104294;
     TodoReturn triggerGravityChange(EffectGameObject*, int);
-    TodoReturn triggerMoveCommand(EffectGameObject*);
+    void triggerMoveCommand(EffectGameObject*) = win 0x219690;
     TodoReturn triggerRotateCommand(EnhancedTriggerObject*);
     void triggerShaderCommand(ShaderGameObject*) = win 0x21bc80;
     void triggerTransformCommand(TransformTriggerGameObject*) = win 0x21a110;
@@ -10440,7 +10440,7 @@ class GJEffectManager : cocos2d::CCNode {
     int countForItem(int) = win 0x25b060, imac 0x2d6930, m1 0x2777b8;
     TodoReturn createFollowCommand(float, float, float, int, int, int, int);
     TodoReturn createKeyframeCommand(int, cocos2d::CCArray*, GameObject*, int, int, bool, float, float, float, float, float, float, gd::vector<int> const&);
-    TodoReturn createMoveCommand(cocos2d::CCPoint, int, float, int, float, bool, bool, bool, bool, float, float, int, int);
+    void createMoveCommand(cocos2d::CCPoint pt, int groupID, float duration, int easingType, float easingRate, bool lockPlayerX, bool lockPlayerY, bool lockCameraX, bool lockCameraY, float moveModX, float moveModY, int uniqueID, int controlID) = win 0x255370;
     TodoReturn createPlayerFollowCommand(float, float, int, float, float, int, int, int);
     TodoReturn createRotateCommand(float, float, int, int, int, float, bool, bool, bool, int, int);
     TodoReturn createTransformCommand(double, double, double, double, bool, float, int, int, int, float, bool, bool, int, int);
@@ -10971,7 +10971,7 @@ class GJGameState {
     float m_unkUint10;
     int m_unkUint11;
     int m_unkUint12;
-    cocos2d::CCPoint m_unkPoint31;
+    cocos2d::CCPoint m_cameraStepDiff;
     float m_unkFloat10;
     unsigned int m_timeModRelated;
     bool m_timeModRelated2;
@@ -14361,7 +14361,14 @@ class LevelBrowserLayer : cocos2d::CCLayerColor, LevelManagerDelegate, FLAlertLa
     virtual cocos2d::CCArray* updateResultArray(cocos2d::CCArray*) = win 0x2c0770, m1 0x3ecf38, imac 0x47f180, ios 0x411900;
     virtual bool cellPerformedAction(TableViewCell*, int, CellAction, cocos2d::CCNode*) = win 0x2c7950, imac 0x47eef0, m1 0x3eccf0, ios 0x411764;
 
-    TodoReturn createNewLevel(cocos2d::CCObject*);
+    void createNewLevel(cocos2d::CCObject*) = ios 0x411048, win inline, m1 0x3ec4a8, imac 0x47e640 {
+        this->setKeypadEnabled(false);
+        this->setKeyboardEnabled(false);
+        GameLevelManager* glm = GameLevelManager::sharedState();
+        GJGameLevel* newLevel = glm->createNewLevel();
+        glm->m_returnToLocalLevels = true;
+        cocos2d::CCDirector::sharedDirector()->replaceScene(cocos2d::CCTransitionFade::create(0.5f, EditLevelLayer::scene(newLevel)));
+    }
     TodoReturn createNewList(cocos2d::CCObject*) = imac 0x47e520;
     TodoReturn createNewSmartTemplate(cocos2d::CCObject*);
     TodoReturn deleteSelected();
@@ -14382,7 +14389,7 @@ class LevelBrowserLayer : cocos2d::CCLayerColor, LevelManagerDelegate, FLAlertLa
     void onInfo(cocos2d::CCObject* sender) = ios 0x40e7a0, win 0x2c4df0, imac 0x47ae20, m1 0x3e91dc;
     void onLocalMode(cocos2d::CCObject* sender) = win 0x2c5c70;
     void onMyOnlineLevels(cocos2d::CCObject* sender) = win 0x2c5e60, imac 0x47a430;
-    void onNew(cocos2d::CCObject* sender) = win 0x2c57c0, imac 0x47a340;
+    void onNew(cocos2d::CCObject* sender) = win 0x2c57c0, imac 0x47a340, ios 0x40e01c, m1 0x3e8664;
     void onNextPage(cocos2d::CCObject* sender) = win 0x2c4ba0, m1 0x3e8068, imac 0x479d50, ios 0x40db78;
     void onPrevPage(cocos2d::CCObject* sender) = win 0x2c4c20, m1 0x3e8034, imac 0x479d10, ios 0x40db44;
     void onRefresh(cocos2d::CCObject* sender) = win 0x2c6660, m1 0x3e909c, imac 0x47acf0;
@@ -17486,7 +17493,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void stopDashing() = ios 0x21d57c, win 0x380820, m1 0x370c60, imac 0x3efe00;
     void stopParticles() = ios 0x21ea18, win 0x375af0;
     void stopPlatformerJumpAnimation() = ios 0x21effc, win 0x3772d0, imac 0x3f2500, m1 0x37314c;
-    TodoReturn stopRotation(bool, int);
+    void stopRotation(bool, int);
     void stopStreak2() = ios 0x22d978, imac 0x409d20, m1 0x387654;
     void storeCollision(PlayerCollisionDirection, int);
     bool switchedDirTo(PlayerButton) = win 0x382000;
@@ -17557,7 +17564,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void updateRotation(float) = ios 0x224ca4, win 0x37b1f0, imac 0x3fb360, m1 0x37a378;
     void updateShipRotation(float) = win 0x37ae10;
     void updateShipSpriteExtra(gd::string) = ios 0x219528;
-    TodoReturn updateSlopeRotation(float);
+    void updateSlopeRotation(float);
     TodoReturn updateSlopeYVelocity(float);
     void updateSpecial(float) = ios 0x21e1a0, imac 0x3f0f70;
     TodoReturn updateStateVariables();
@@ -21659,7 +21666,7 @@ class SetupTriggerPopup : FLAlertLayer, TextInputDelegate, ConfigureValuePopupDe
     void onEase(cocos2d::CCObject* sender) = win 0x464ac0;
     void onEaseRate(cocos2d::CCObject* sender) = win 0x464b30;
     void onMultiTrigger(cocos2d::CCObject* sender);
-    void onPage(cocos2d::CCObject* sender) = win 0x45bf30;
+    void onPage(cocos2d::CCObject* sender) = win 0x45bf30, m1 0x1d6454, imac 0x223570, ios 0x131ac0;
     void onSpawnedByTrigger(cocos2d::CCObject* sender) = win 0x45d2d0;
     void onToggleTriggerValue(cocos2d::CCObject* sender) = win 0x45f6c0, m1 0x1da960, imac 0x228f60, ios 0x13516c;
     void onTouchTriggered(cocos2d::CCObject* sender) = win 0x45d1e0;
