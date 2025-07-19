@@ -7337,22 +7337,10 @@ class GameManager : GManager {
     TodoReturn finishedLoadingMGAsync1(cocos2d::CCObject*);
     TodoReturn finishedLoadingMGAsync2(cocos2d::CCObject*);
     void followTwitch() = m1 0x2fe874, imac 0x36d1e0, ios 0x317578, win inline {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://www.twitch.tv/directory/category/geometry-dash");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://www.twitch.tv/directory/category/geometry-dash");
     };
     void followTwitter() = m1 0x2fe774, imac 0x36d100, ios 0x317480, win inline {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://twitter.com/robtopgames");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://twitter.com/robtopgames");
     };
     TodoReturn framesForAnimation(int);
     TodoReturn frameTimeForAnimation(int);
@@ -7465,35 +7453,17 @@ class GameManager : GManager {
     bool isIconUnlocked(int, IconType) = ios 0x312be8, win 0x1794e0, imac 0x3648d0, m1 0x2f7388;
     TodoReturn itemPurchased(char const*);
     void joinDiscord() = win inline, m1 0x2fe8f4, imac 0x36d250, ios 0x3175f4 {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
     }
     void joinReddit() = win inline, m1 0x2fe974, imac 0x36d2c0, ios 0x317670 {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
     }
     int keyForIcon(int iconIdx, int iconEnum) {
         return m_keyStartForIcon.at(iconEnum) + iconIdx - 1;
     }
     TodoReturn levelIsPremium(int, int);
     void likeFacebook() = win inline, m1 0x2fe6f4, imac 0x36d090, ios 0x317404 {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://www.facebook.com/geometrydash");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://www.facebook.com/geometrydash");
     }
     void loadBackground(int) = win 0x17f880, m1 0x300f5c, imac 0x36fc40, ios 0x3185c0;
     void loadBackgroundAsync(int);
@@ -7634,13 +7604,7 @@ class GameManager : GManager {
     void startUpdate();
     gd::string stringForCustomObject(int customObjectID) = win 0x180950, imac 0x371170, m1 0x3025a0, ios 0x3195f0;
     void subYouTube() = m1 0x2fe7f4, imac 0x36d170, ios 0x3174fc, win inline {
-        #ifndef GEODE_IS_WINDOWS
-        if (GameToolbox::doWeHaveInternet()) {
-        #endif
-            cocos2d::CCApplication::sharedApplication()->openURL("https://www.youtube.com/user/RobTopGames");
-        #ifndef GEODE_IS_WINDOWS
-        }
-        #endif
+        cocos2d::CCApplication::sharedApplication()->openURL("https://www.youtube.com/user/RobTopGames");
     };
     TodoReturn switchCustomObjects(int, int);
     TodoReturn switchScreenMode(bool, bool, bool, bool);
