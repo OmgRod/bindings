@@ -7448,12 +7448,12 @@ class GameManager : GManager {
     bool isIconLoaded(int, int) = imac 0x36d8f0;
     bool isIconUnlocked(int, IconType) = ios 0x312be8, win 0x1794e0, imac 0x3648d0, m1 0x2f7388;
     TodoReturn itemPurchased(char const*);
-    void joinDiscord() {
+    void joinDiscord() = win inline, m1 0x2fe8f4, imac 0x36d250, ios 0x3175f4 {
         if (GameToolbox::doWeHaveInternet()) {
             cocos2d::CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
         }
     }
-    void joinReddit() {
+    void joinReddit() = win inline, m1 0x2fe974, imac 0x36d2c0, ios 0x317670 {
         if (GameToolbox::doWeHaveInternet()) {
             cocos2d::CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
         }
@@ -7462,7 +7462,7 @@ class GameManager : GManager {
         return m_keyStartForIcon.at(iconEnum) + iconIdx - 1;
     }
     TodoReturn levelIsPremium(int, int);
-    void likeFacebook() {
+    void likeFacebook() = win inline, m1 0x2fe6f4, imac 0x36d090, ios 0x317404 {
         if (GameToolbox::doWeHaveInternet()) {
             cocos2d::CCApplication::sharedApplication()->openURL("https://www.facebook.com/geometrydash");
         }
