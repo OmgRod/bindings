@@ -7450,19 +7450,21 @@ class GameManager : GManager {
     TodoReturn itemPurchased(char const*);
     void joinDiscord() {
         if (GameToolbox::doWeHaveInternet()) {
-            CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
+            cocos2d::CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
         }
     }
     void joinReddit() {
         if (GameToolbox::doWeHaveInternet()) {
-            CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
+            cocos2d::CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
         }
     }
     int keyForIcon(int iconIdx, int iconEnum) {
         return m_keyStartForIcon.at(iconEnum) + iconIdx - 1;
     }
     TodoReturn levelIsPremium(int, int);
-    void likeFacebook() = m1 0x2fe6f4, imac 0x36d090, ios 0x317404;
+    void likeFacebook() {
+
+    }
     void loadBackground(int) = win 0x17f880, m1 0x300f5c, imac 0x36fc40, ios 0x3185c0;
     void loadBackgroundAsync(int);
 
