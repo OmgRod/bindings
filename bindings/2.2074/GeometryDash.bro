@@ -7453,7 +7453,11 @@ class GameManager : GManager {
             CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
         }
     }
-    void joinReddit() = m1 0x2fe974, imac 0x36d2c0, ios 0x317670;
+    void joinReddit() {
+        if (GameToolbox::doWeHaveInternet()) {
+            CCApplication::sharedApplication()->openURL("https://www.reddit.com/r/geometrydash/");
+        }
+    }
     int keyForIcon(int iconIdx, int iconEnum) {
         return m_keyStartForIcon.at(iconEnum) + iconIdx - 1;
     }
