@@ -7463,7 +7463,9 @@ class GameManager : GManager {
     }
     TodoReturn levelIsPremium(int, int);
     void likeFacebook() {
-
+        if (GameToolbox::doWeHaveInternet()) {
+            cocos2d::CCApplication::sharedApplication()->openURL("https://www.facebook.com/geometrydash");
+        }
     }
     void loadBackground(int) = win 0x17f880, m1 0x300f5c, imac 0x36fc40, ios 0x3185c0;
     void loadBackgroundAsync(int);
