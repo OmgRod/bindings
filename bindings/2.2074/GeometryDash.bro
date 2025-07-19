@@ -7448,7 +7448,11 @@ class GameManager : GManager {
     bool isIconLoaded(int, int) = imac 0x36d8f0;
     bool isIconUnlocked(int, IconType) = ios 0x312be8, win 0x1794e0, imac 0x3648d0, m1 0x2f7388;
     TodoReturn itemPurchased(char const*);
-    void joinDiscord() = m1 0x2fe8f4, imac 0x36d250, ios 0x3175f4;
+    void joinDiscord() {
+        if (GameToolbox::doWeHaveInternet()) {
+            CCApplication::sharedApplication()->openURL("https://discord.com/invite/geometrydash");
+        }
+    }
     void joinReddit() = m1 0x2fe974, imac 0x36d2c0, ios 0x317670;
     int keyForIcon(int iconIdx, int iconEnum) {
         return m_keyStartForIcon.at(iconEnum) + iconIdx - 1;
